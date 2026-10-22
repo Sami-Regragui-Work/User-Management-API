@@ -14,6 +14,7 @@ public class DataSeeder implements InitializingBean {
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     public DataSeeder(UserRepository userRepository, PasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.encoder = encoder;
