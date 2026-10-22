@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="default" uuid="b598a07d-c908-479b-9c98-595452b4c429">
+    <data-source source="LOCAL" name="uma_db" uuid="b598a07d-c908-479b-9c98-595452b4c429">
       <driver-ref>h2.unified</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.h2.Driver</jdbc-driver>
-      <jdbc-url>jdbc:h2:mem:default</jdbc-url>
+      <jdbc-url>jdbc:h2:mem:uma_db;DB_CLOSE_DELAY=-1</jdbc-url>
       <jdbc-additional-properties>
         <property name="com.intellij.clouds.kubernetes.db.host.port" />
         <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
