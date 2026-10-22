@@ -1,0 +1,27 @@
+$kind: http-request
+name: '06 - Update User'
+order: 6000
+method: PUT
+url: '{{baseUrl}}/api/users/{{createdUserId}}'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Dave Updated",
+      "email": "dave.updated{{$timestamp}}@example.com"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Response name equals 'Dave Updated'", function () {
+          const json = pm.response.json();
+          pm.expect(json.name).to.equal("Dave Updated");
+      });

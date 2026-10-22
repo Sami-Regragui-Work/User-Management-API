@@ -1,0 +1,42 @@
+$kind: http-request
+name: '01 - Create User'
+order: 1000
+method: POST
+url: '{{baseUrl}}/api/users'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Dave",
+      "email": "dave{{$timestamp}}@example.com",
+      "password": "Dave12345!",
+      "role": "USER"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 201", function () {
+          pm.response.to.have.status(201);
+      });
+
+      pm.test("Response body has id and email", function () {
+          const json = pm.response.json();
+          pm.expect(json).to.have.property("id");
+          pm.expect(json).to.have.property("email");
+      });
+
+      pm.test("Response body does NOT contain password or hashedPassword", function () {
+          const json = pm.response.json();
+          pm.expect(json).to.not.have.property("password");
+          pm.expect(json).to.not.have.property("hashedPassword");
+      });
+
+      // Save the created user ID into collection variable
+      const json = pm.response.json();
+      if (json && json.id) {
+          pm.collectionVariables.set("createdUserId", json.id);
+      }

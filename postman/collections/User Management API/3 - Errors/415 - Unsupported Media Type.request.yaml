@@ -1,0 +1,35 @@
+$kind: http-request
+name: '415 - Unsupported Media Type'
+order: 18000
+method: POST
+url: '{{baseUrl}}/api/users'
+auth:
+  type: basic
+  credentials:
+    - key: username
+      value: '{{adminEmail}}'
+    - key: password
+      value: '{{adminPassword}}'
+headers:
+  - key: Content-Type
+    value: text/plain
+body:
+  type: text
+  content: hello
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 415", function () {
+          pm.response.to.have.status(415);
+      });
+
+      pm.test("Error response body has required properties", function () {
+          const json = pm.response.json();
+          pm.expect(json).to.have.property("timestamp");
+          pm.expect(json).to.have.property("status");
+          pm.expect(json).to.have.property("error");
+          pm.expect(json).to.have.property("message");
+          pm.expect(json).to.have.property("path");
+          pm.expect(json.status).to.equal(415);
+      });

@@ -1,0 +1,12 @@
+$kind: http-request
+name: '05 - Get User By Id'
+order: 5000
+method: GET
+url: '{{baseUrl}}/api/users/{{createdUserId}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });

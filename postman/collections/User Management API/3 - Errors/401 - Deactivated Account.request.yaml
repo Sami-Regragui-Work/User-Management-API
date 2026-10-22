@@ -1,0 +1,29 @@
+$kind: http-request
+name: '401 - Deactivated Account'
+order: 3000
+method: GET
+url: '{{baseUrl}}/api/users/me'
+auth:
+  type: basic
+  credentials:
+    - key: username
+      value: '{{deactEmail}}'
+    - key: password
+      value: '{{deactPassword}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 401", function () {
+          pm.response.to.have.status(401);
+      });
+
+      pm.test("Error response body has required properties", function () {
+          const json = pm.response.json();
+          pm.expect(json).to.have.property("timestamp");
+          pm.expect(json).to.have.property("status");
+          pm.expect(json).to.have.property("error");
+          pm.expect(json).to.have.property("message");
+          pm.expect(json).to.have.property("path");
+          pm.expect(json.status).to.equal(401);
+      });

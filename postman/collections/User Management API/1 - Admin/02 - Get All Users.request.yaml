@@ -1,0 +1,33 @@
+$kind: http-request
+name: '02 - Get All Users'
+order: 2000
+method: GET
+url: '{{baseUrl}}/api/users'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Response is an array", function () {
+          const json = pm.response.json();
+          pm.expect(json).to.be.an("array");
+      });
+
+      pm.test("No item contains password or hashedPassword", function () {
+          const json = pm.response.json();
+          json.forEach(function (user) {
+              pm.expect(user).to.not.have.property("password");
+              pm.expect(user).to.not.have.property("hashedPassword");
+          });
+      });
+
+      pm.test("No item has email equal to deactEmail", function () {
+          const json = pm.response.json();
+          const deactEmail = pm.collectionVariables.get("deactEmail");
+          json.forEach(function (user) {
+              pm.expect(user.email).to.not.equal(deactEmail);
+          });
+      });

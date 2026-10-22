@@ -1,0 +1,5 @@
+$kind: collection
+name: '3 - Errors'
+order: 3000
+auth:
+  type: noauth

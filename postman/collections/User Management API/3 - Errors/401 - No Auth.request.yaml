@@ -1,0 +1,28 @@
+$kind: http-request
+name: '401 - No Auth'
+order: 1000
+method: GET
+url: '{{baseUrl}}/api/users'
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 401", function () {
+          pm.response.to.have.status(401);
+      });
+
+      pm.test("Header WWW-Authenticate exists", function () {
+          pm.expect(pm.response.headers.get("WWW-Authenticate")).to.exist;
+      });
+
+      pm.test("Error response body has required properties", function () {
+          const json = pm.response.json();
+          pm.expect(json).to.have.property("timestamp");
+          pm.expect(json).to.have.property("status");
+          pm.expect(json).to.have.property("error");
+          pm.expect(json).to.have.property("message");
+          pm.expect(json).to.have.property("path");
+          pm.expect(json.status).to.equal(401);
+      });

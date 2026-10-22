@@ -1,0 +1,18 @@
+$kind: http-request
+name: '08 - Get My Profile'
+order: 1000
+method: GET
+url: '{{baseUrl}}/api/users/me'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Response email equals user1Email", function () {
+          const json = pm.response.json();
+          const user1Email = pm.collectionVariables.get("user1Email");
+          pm.expect(json.email).to.equal(user1Email);
+      });

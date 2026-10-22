@@ -1,0 +1,10 @@
+$kind: collection
+name: '1 - Admin'
+order: 1000
+auth:
+  type: basic
+  credentials:
+    - key: username
+      value: '{{adminEmail}}'
+    - key: password
+      value: '{{adminPassword}}'
