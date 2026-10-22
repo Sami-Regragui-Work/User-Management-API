@@ -1,0 +1,20 @@
+$kind: http-request
+name: '03 - Get Users Page Size 2'
+order: 3000
+method: GET
+url: '{{baseUrl}}/api/users'
+queryParams:
+  - key: size
+    value: '2'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Response contains exactly 2 items", function () {
+          const json = pm.response.json();
+          pm.expect(json).to.be.an("array").with.lengthOf(2);
+      });

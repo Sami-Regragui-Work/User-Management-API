@@ -1,0 +1,17 @@
+$kind: http-request
+name: '04 - Get Users Page 1 Size 2'
+order: 4000
+method: GET
+url: '{{baseUrl}}/api/users'
+queryParams:
+  - key: size
+    value: '2'
+  - key: page
+    value: '1'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
