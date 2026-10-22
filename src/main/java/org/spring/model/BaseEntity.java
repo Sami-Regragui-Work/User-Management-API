@@ -1,5 +1,6 @@
 package org.spring.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
@@ -11,6 +12,7 @@ import java.time.Instant;
 public class BaseEntity {
     @Column(name = "created_at")
     protected Instant createdAt;
+
     @Column(name = "updated_at")
     protected Instant updatedAt;
 

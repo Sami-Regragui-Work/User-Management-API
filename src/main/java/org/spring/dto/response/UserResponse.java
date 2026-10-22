@@ -1,5 +1,6 @@
 package org.spring.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.spring.model.enums.UserRole;
 
 import java.time.Instant;
@@ -10,7 +11,9 @@ public class UserResponse {
     private String email;
     private UserRole role;
     private boolean active;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Instant createdAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Instant updatedAt;
 
     public UserResponse(Long id, String name, String email, UserRole role, boolean active, Instant createdAt, Instant updatedAt) {
