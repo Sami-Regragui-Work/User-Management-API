@@ -1,28 +1,17 @@
 $kind: collection
-name: 'User Management API'
 description: |-
   REST API collection for User Management, secured with HTTP Basic Auth.
 
   **Run order:** Execute folders in order — "1 - Admin" first, then "2 - Me", then "3 - Errors".
   The collection is safe to re-run as many times as needed until the application is restarted.
 variables:
-  - key: baseUrl
-    value: 'http://localhost:8080/user-management'
-  - key: adminEmail
-    value: 'admin@example.com'
-  - key: adminPassword
-    value: 'admin@example.com'
-  - key: user1Email
-    value: 'user1@example.com'
-  - key: user1Password
-    value: 'user1@example.com'
-  - key: user2Email
-    value: 'user2@example.com'
-  - key: user2Password
-    value: 'user2@example.com'
-  - key: deactEmail
-    value: 'd_user@example.com'
-  - key: deactPassword
-    value: 'd_user@example.com'
-  - key: createdUserId
-    value: ''
+  baseUrl: http://localhost:8080/user-management
+  adminEmail: admin@example.com
+  adminPassword: admin@example.com
+  user1Email: user1@example.com
+  user1Password: user1@example.com
+  user2Email: user2@example.com
+  user2Password: user2@example.com
+  deactEmail: d_user@example.com
+  deactPassword: d_user@example.com
+  createdUserId: ""
