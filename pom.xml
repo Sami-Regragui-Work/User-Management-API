@@ -10,8 +10,9 @@
     <packaging>war</packaging>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+<!--        <maven.compiler.source>17</maven.compiler.source>-->
+<!--        <maven.compiler.target>17</maven.compiler.target>-->
+<!--        <maven.compiler.parameters>true</maven.compiler.parameters>-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -82,13 +83,30 @@
     </dependencies>
 
     <build>
+        <finalName>user-management</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.5.1</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.14.0</version>
+                <configuration>
+                    <release>17</release>
+                    <parameters>true</parameters>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.3</version>
+            </plugin>
         </plugins>
     </build>
 
