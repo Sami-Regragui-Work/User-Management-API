@@ -1,0 +1,6 @@
+db.url=jdbc:h2:mem:uma_db;DB_CLOSE_DELAY=-1
+db.username=sa
+db.password=
+db.driver_class_name=org.h2.Driver
+hibernate.hbm2ddl.auto=update
+hibernate.show_sql=false
